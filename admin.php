@@ -90,8 +90,80 @@ while ($row2 = $result2->fetch_assoc()){
 
 
 ?>
+?>
+<h1>
+Or you can search for an individual student:
+
+</h1>	
+<form id="individual" action="admin.php" method="POST">	
+	Last Name:
+		<input id ="lastname" name="lastnamebutton" type ="text">
+	First Name:
+		<input id ="firstname" name="firstname" type ="text">
+		<input type = "submit" name="firstnamebutton" value="Search By Name">
+		<br><br><br>	
+
+		
+<?php
+    if(isset($_POST['firstnamebutton'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
+									join athletic_users
+    								on athletic_attendance.user_id=athletic_users.id
+    								where lastname = '".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%';");
+						
+while ($row2 = $result2->fetch_assoc()){
+    echo htmlentities($row2['lastname']);
+    echo " ";
+    echo htmlentities($row2['firstname']);
+    echo " ";
+    echo htmlentities($row2['count(user_id)']);
+    echo "<br>";
+}
+echo "<br><br><br>";
+
+}
 
 
+
+?>
+<br>
+	Student ID number:
+		<input id ="IDnumber" name="IDnumber" type ="text">
+		<input type = "submit" name="idnumberbutton" value="Search By ID Number">
+		
+		<br><br><br>
+		
+		
+<?php
+    if(isset($_POST['idnumberbutton'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance
+								JOIN athletic_users
+    							ON athletic_attendance.user_id=athletic_users.id
+    							WHERE id = '".$_POST['IDnumber']."';");
+
+						
+while ($row2 = $result2->fetch_assoc()){
+    echo htmlentities($row2['lastname']);
+    echo " ";
+    echo htmlentities($row2['firstname']);
+    echo " ";
+    echo htmlentities($row2['count(user_id)']);
+    echo "<br><br>";
+}}
+
+
+
+?>
+
+<hr><br><br>
+<a href="sports.php"><h1>Click Here for Individual Sports Data</h1></a>
+
+
+</form>
 
 
 </form>
