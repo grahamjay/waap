@@ -1,0 +1,99 @@
+<head>
+<h1 style="text-align:center">Admin Page</h1>
+</head>
+
+<body>
+
+<form id="all_click" action="admin.php" method="POST">
+<h1>Click the following for giant list of attendance: </h1>
+	<input type = "submit" value ="ALL ATTENDANCE EVER" name="all_click">
+
+<br><br><br><br><br><hr>	
+
+</body>
+<ul> 
+    <?php
+    if(isset($_POST['all_click'])){
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+$result = $db->query("select lastname, firstname, count(user_id) 
+					from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
+					group by user_id 
+					ORDER BY lastname;");
+					
+					
+while ($row = $result->fetch_assoc()){
+    echo htmlentities($row['lastname']);
+    echo " ";
+    echo htmlentities($row['firstname']);
+    echo " ";
+    echo htmlentities($row['count(user_id)']);
+    echo "<br><br>";
+
+
+}echo "<hr>";
+}
+
+
+?>
+</form>
+
+<br><br>
+	
+	
+<h1>
+Or you can choose a set of dates:
+
+</h1>	
+<form id="all_click" action="admin.php" method="POST">	
+	Start Month:
+		<input id ="start_month" name="start_month" type ="text">
+	Start Day:
+		<input id ="start_day" name="start_day" type ="text">	
+	Start Year:
+		<input id ="start_year" name="start_year" type ="text">
+		
+		<br><br><br>
+	End Month:
+		<input id ="end_month" name="end_month" type ="text">
+	End Day:
+		<input id ="end_day" name="end_day" type ="text">	
+	End Year:
+		<input id ="end_year" name="end_year" type ="text">	
+		
+		<input type = "submit" name="date_range" value="Submit Date Range">
+		<hr><br><br><br>
+
+<?php
+    if(isset($_POST['date_range'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+		$result2 = $db->query("SELECT lastname, firstname, count(user_id) 
+								FROM athletic_attendance 
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+   					WHERE attendance_datetime >= '".$_POST['start_year']."-".$_POST['start_month']."-".$_POST['start_day']."'"
+    				."AND attendance_datetime <= '".$_POST['end_year']."-".$_POST['end_month']."-".$_POST['end_day']."'". 
+											"GROUP BY user_id 
+											ORDER BY lastname;");
+	echo "THE DATES YOU HAVE ENTERED ARE: ".$_POST['start_month']."-".$_POST['start_day']."-".$_POST['start_year']."    TO    "	  
+		.$_POST['end_month']."-".$_POST['end_day']."-".$_POST['end_year']."<br><br><hr><br><br>";		
+					
+							
+while ($row2 = $result2->fetch_assoc()){
+    echo htmlentities($row2['lastname']);
+    echo " ";
+    echo htmlentities($row2['firstname']);
+    echo " ";
+    echo htmlentities($row2['count(user_id)']);
+    echo "<br><br>";
+}}
+
+
+
+?>
+
+
+
+
+</form>
+
+</ul>
