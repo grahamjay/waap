@@ -54,6 +54,20 @@
 
 <br><br><br>
 
+<?php
+    if(isset($_POST['submit'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+		$result2 = $db->query("INSERT INTO statement");
+
+I NEED TO WRITE A BUNCH OF IF STATEMENTS IN HERE THAT WILL TAKE THE INPUT FROM ABOVE AND INSERT THEM INTO THE SQL TABLE
+THAT WILL REQUIRE A NEW IF FOR EACH INPUT, WITH THE ELSE BEING TO RERUN THE PAGE WITH A SUMMARY OF WHO THEY ENTERED FOR EACH SPORT						
+
+}}
+
+
+
+?>
 </form>
 
 
