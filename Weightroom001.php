@@ -41,6 +41,8 @@ if(isset($_POST['id'])){
 		echo "User not found, please try again.";
 	}
 }
+
+echo var_dump($_POST);
 ?>
 
 
