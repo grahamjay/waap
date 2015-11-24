@@ -1,3 +1,4 @@
+<!-- this is the first initial log in page -->
 
 
 
@@ -11,11 +12,11 @@
 <h1> Waukee Weight Room Login
 </h1>
 <form id="number" action="Weightroom001.php" method="POST">
-	ID number:
-	<br><br>
+	<p>ID number:</p>
 	
-	<input id ="id" name="id" type ="text">
 	
+	<textarea rows="1" class="username" id="Student ID" placeholder="    Enter ID Number"></textarea>
+
 	<br><br>
 	<button type="button" onclick="window.location.href='Weightroom002.php'">Submit</button>
 </form>
