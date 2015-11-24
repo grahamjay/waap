@@ -15,7 +15,7 @@
 	<p>ID number:</p>
 	
 	
-	<textarea rows="1" class="username" id="Student ID" placeholder="    Enter ID Number"></textarea>
+	<textarea rows="1" class="username" id="Student ID" name="id" placeholder="    Enter ID Number"></textarea>
 
 	<br><br>
 	<button type="button" onclick="window.location.href='Weightroom002.php'">Submit</button>
