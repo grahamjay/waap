@@ -22,7 +22,7 @@
 
 <?php
 
-echo $_POST;
+
 
 if ($_POST['id'] == 123456) {
 	header("Location: http://107.170.184.216/admin.php");
