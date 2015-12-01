@@ -110,7 +110,8 @@ Or you can search for an individual student:
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
-    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') OR lastname = '".$_POST['lastnamebutton']";");
+    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
+    								OR lastname = ".$_POST['lastnamebutton'].";");
 						
 while ($row2 = $result2->fetch_assoc()){
     echo htmlentities($row2['lastname']);
