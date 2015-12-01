@@ -1,8 +1,10 @@
 <head>
-<h1 style="text-align:center">Admin Page</h1>
+
 </head>
 
 <body>
+
+<h1 style="text-align:center">Admin Page</h1>
 
 <form id="all_click" action="admin.php" method="POST">
 <h1>Click the following for giant list of attendance: </h1>
@@ -10,7 +12,7 @@
 
 <br><br><br><br><br><hr>	
 
-</body>
+
 <ul> 
     <?php
     if(isset($_POST['all_click'])){
@@ -167,4 +169,7 @@ while ($row2 = $result2->fetch_assoc()){
 
 </form>
 
+
 </ul>
+
+</body>
