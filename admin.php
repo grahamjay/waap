@@ -25,7 +25,7 @@ echo "<tr>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result->fetch_assoc()){
+while ($row = $result2->fetch_assoc()){
    echo "<tr>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
@@ -86,7 +86,7 @@ echo "<tr>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result->fetch_assoc()){
+while ($row = $result2->fetch_assoc()){
    echo "<tr>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
@@ -128,7 +128,7 @@ echo "<tr>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result->fetch_assoc()){
+while ($row = $result2->fetch_assoc()){
    echo "<tr>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
@@ -166,7 +166,7 @@ echo "<tr>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result->fetch_assoc()){
+while ($row = $result2->fetch_assoc()){
    echo "<tr>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
