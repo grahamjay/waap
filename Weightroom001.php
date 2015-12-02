@@ -42,7 +42,7 @@ if(isset($_POST['id'])){
    if ($_POST['id'] == $row['id']) {
        $_SESSION['cat'] = $_POST['id'];
        setcookie('userid', $_POST['id'], time() + 3600);
-       header("Location: http://$host$uri/weightroom002.php");
+       header("Location: http://$host$uri/Weightroom002.php");
 
    } else {
        echo "<br><br><br>";
