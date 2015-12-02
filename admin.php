@@ -23,15 +23,21 @@ $result = $db->query("select lastname, firstname, count(user_id)
 					ORDER BY lastname;");
 					
 					
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
 while ($row = $result->fetch_assoc()){
-    echo htmlentities($row['lastname']);
-    echo " ";
-    echo htmlentities($row['firstname']);
-    echo " ";
-    echo htmlentities($row['count(user_id)']);
-    echo "<br><br>";
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
 
 
+}echo "</table>";
+}
 }echo "<hr>";
 }
 
