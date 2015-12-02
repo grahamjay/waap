@@ -1,10 +1,8 @@
 <head>
-
+<h1 style="text-align:center">Admin Page</h1>
 </head>
 
 <body>
-
-<h1 style="text-align:center">Admin Page</h1>
 
 <form id="all_click" action="admin.php" method="POST">
 <h1>Click the following for giant list of attendance: </h1>
@@ -12,17 +10,16 @@
 
 <br><br><br><br><br><hr>	
 
-
+</body>
 <ul> 
-    <?php
-    if(isset($_POST['all_click'])){
-        $db = new mysqli("127.0.0.1", "root", "root", "test");
+<?php
+   if(isset($_POST['all_click'])){
+       $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
 $result = $db->query("select lastname, firstname, count(user_id) 
-					from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
-					group by user_id 
-					ORDER BY lastname;");
-					
-					
+                   from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
+                   group by user_id 
+                   ORDER BY lastname;");
+                   
 echo "<table border = 1>";
 echo "<tr>";
 echo "<td> Last Name </td>";
@@ -37,8 +34,6 @@ while ($row = $result->fetch_assoc()){
 
 
 }echo "</table>";
-}
-}echo "<hr>";
 }
 
 
@@ -114,11 +109,12 @@ Or you can search for an individual student:
 <?php
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "root", "test");
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
-    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') OR lastname = '".$_POST['lastnamebutton']";");
+    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
+    								OR lastname = ".$_POST['lastnamebutton'].";");
 						
 while ($row2 = $result2->fetch_assoc()){
     echo htmlentities($row2['lastname']);
@@ -146,7 +142,7 @@ echo "<br><br><br>";
 <?php
     if(isset($_POST['idnumberbutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "root", "test");
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance
 								JOIN athletic_users
     							ON athletic_attendance.user_id=athletic_users.id
@@ -175,7 +171,4 @@ while ($row2 = $result2->fetch_assoc()){
 
 </form>
 
-
 </ul>
-
-</body>
