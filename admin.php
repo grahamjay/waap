@@ -106,7 +106,7 @@ Or you can search for an individual student:
 </h1>	
 <form id="individual" action="admin.php" method="POST">	
 	Last Name:
-		<input id ="lastname" name="lastnamebutton" type ="text">
+		<input id ="lastnamebutton" name="lastnamebutton" type ="text">
 	First Name:
 		<input id ="firstname" name="firstname" type ="text">
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
