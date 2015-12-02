@@ -14,7 +14,7 @@
 <ul> 
 <?php
    if(isset($_POST['all_click'])){
-       $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+       $db = new mysqli("127.0.0.1", "root", "root", "test");
 $result = $db->query("select lastname, firstname, count(user_id) 
                    from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
                    group by user_id 
@@ -109,7 +109,7 @@ Or you can search for an individual student:
 <?php
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
@@ -142,7 +142,7 @@ echo "<br><br><br>";
 <?php
     if(isset($_POST['idnumberbutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance
 								JOIN athletic_users
     							ON athletic_attendance.user_id=athletic_users.id
