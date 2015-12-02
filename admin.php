@@ -112,7 +112,7 @@ Or you can search for an individual student:
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
 		<br><br><br>	
 
-		
+</form>		
 <?php
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
@@ -143,6 +143,7 @@ while ($row = $result2->fetch_assoc()){
 
 
 ?>
+
 <br>
 	Student ID number:
 		<input id ="IDnumber" name="IDnumber" type ="text">
