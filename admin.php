@@ -81,14 +81,21 @@ Or you can choose a set of dates:
 		.$_POST['end_month']."-".$_POST['end_day']."-".$_POST['end_year']."<br><br><hr><br><br>";		
 					
 							
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br><br>";
-}}
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
+}
 
 
 
@@ -116,15 +123,20 @@ Or you can search for an individual student:
     								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
     								OR lastname = ".$_POST['lastnamebutton'].";");
 						
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br>";
-}
-echo "<br><br><br>";
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
 
 }
 
@@ -149,14 +161,21 @@ echo "<br><br><br>";
     							WHERE id = '".$_POST['IDnumber']."';");
 
 						
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br><br>";
-}}
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
+}
 
 
 
