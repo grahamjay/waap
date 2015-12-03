@@ -61,7 +61,7 @@ See attendance from TODAY:
 		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id) 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
-   								WHERE attendance_datetime = curdate()
+   								WHERE attendance_datetime >= curdate()
 											GROUP BY user_id 
 											ORDER BY lastname;");
 
