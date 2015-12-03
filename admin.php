@@ -82,7 +82,7 @@ while ($row = $result2->fetch_assoc()){
 
 
 ?>
-<br><br><hr>
+<br><br>
 
 <form id="all_click" action="admin.php" method="POST">	
 
@@ -131,7 +131,7 @@ while ($row = $result2->fetch_assoc()){
 
 ?>
 
-<br> <br> <hr> <br> <br>
+<br> <br> <hr> 
 <h1>
 Or you can search for an individual student:
 
