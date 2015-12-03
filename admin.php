@@ -93,6 +93,8 @@ while ($row = $result2->fetch_assoc()){
 
 
 ?>
+
+<br> <br> <hr> <br> <br>
 <h1>
 Or you can search for an individual student:
 
