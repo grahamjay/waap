@@ -141,13 +141,7 @@ while ($row = $result2->fetch_assoc()){
 
 
 
-
-
-
-
-
-
-<br><br>
+<br>
 
 <form id="all_click" action="admin.php" method="POST">	
 
