@@ -58,7 +58,7 @@ See attendance from TODAY:
     if(isset($_POST['today_attendance'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id) 
+		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
    								WHERE attendance_datetime >= curdate()
@@ -71,12 +71,17 @@ echo "<td> Grade </td>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
+echo "<td> Time Checked-In </td>";
+
+
 while ($row = $result2->fetch_assoc()){
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+   echo "<td>".htmlentities($row['Time'])."</td>";
+   
   echo "</tr>";
 
 
