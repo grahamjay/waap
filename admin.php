@@ -100,7 +100,7 @@ See attendance from TODAY in order by the TIME THEY CHECKED IN:
 <?php
     if(isset($_POST['today_attendance_time'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
 		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
