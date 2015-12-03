@@ -106,7 +106,7 @@ See attendance from TODAY in order by the TIME THEY CHECKED IN:
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
    								WHERE attendance_datetime >= curdate()
 											GROUP BY user_id 
-											ORDER BY attendance_datetime;");
+											ORDER BY attendance_datetime and lastname;");
 											
 
 echo "<table border = 1>";
