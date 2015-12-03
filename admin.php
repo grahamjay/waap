@@ -51,7 +51,7 @@ Or you can choose certain dates:
 </h1>	
 <br>
 <form id="all_click" action="admin.php" method="POST">
-See attendance from TODAY:
+See attendance from TODAY in ALPHABETICAL ORDER:
 <input type="submit" name="today_attendance" value="Today's Attendance">
 <br><br>
 <?php
@@ -91,6 +91,62 @@ while ($row = $result2->fetch_assoc()){
 
 
 ?>
+</form>
+
+<form id="all_click" action="admin.php" method="POST">
+See attendance from TODAY in order by the TIME THEY CHECKED IN:
+<input type="submit" name="today_attendance_time" value="Today's Attendance">
+<br><br>
+<?php
+    if(isset($_POST['today_attendance_time'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
+		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
+								FROM athletic_attendance 
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+   								WHERE attendance_datetime >= curdate()
+											GROUP BY user_id 
+											ORDER BY attendance_datetime;");
+											
+
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Grade </td>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+echo "<td> Time Checked-In </td>";
+
+
+while ($row = $result2->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['grade'])."</td>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+   echo "<td>".htmlentities($row['Time'])."</td>";
+   
+  echo "</tr>";
+
+
+}echo "</table>";
+}
+
+
+
+?>
+<br><br>
+</form>
+
+
+
+
+
+
+
+
+
+
 <br><br>
 
 <form id="all_click" action="admin.php" method="POST">	
