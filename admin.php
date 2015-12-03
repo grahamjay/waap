@@ -44,9 +44,46 @@ while ($row = $result->fetch_assoc()){
 	
 	
 <h1>
-Or you can choose a set of dates:
+Or you can choose certain dates:
 
 </h1>	
+<br>
+<form id="all_click" action="admin.php" method="POST">
+See attendance from TODAY:
+<input type="submit" name="today_attendance" value="Today's Attendance">
+<br><br>
+<?php
+    if(isset($_POST['today_attendance'])){
+    echo "<br><br>";
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id) 
+								FROM athletic_attendance 
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+   								WHERE attendance_datetime >= curdate()
+											GROUP BY user_id 
+											ORDER BY lastname;");
+
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result2->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
+}
+
+
+
+?>
+<br><br><hr>
+
 <form id="all_click" action="admin.php" method="POST">	
 
 Choose a start date:
