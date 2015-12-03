@@ -48,37 +48,30 @@ Or you can choose a set of dates:
 
 </h1>	
 <form id="all_click" action="admin.php" method="POST">	
-	Start Month:
-		<input id ="start_month" name="start_month" type ="text">
-	Start Day:
-		<input id ="start_day" name="start_day" type ="text">	
-	Start Year:
-		<input id ="start_year" name="start_year" type ="text">
-		
-		<br><br><br>
-	End Month:
-		<input id ="end_month" name="end_month" type ="text">
-	End Day:
-		<input id ="end_day" name="end_day" type ="text">	
-	End Year:
-		<input id ="end_year" name="end_year" type ="text">	
-		
-		<input type = "submit" name="date_range" value="Submit Date Range">
-		<hr><br><br><br>
+
+Choose a start date:
+<input type="date" value="start_date" name="start_date">
+
+Choose an end date:
+<input type="date" value="end_date" name="end_date">
+<input type="submit" name="submit_dates" value="Input Dates">
+
+
 
 <?php
-    if(isset($_POST['date_range'])){
+    if(isset($_POST['submit_dates'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
 		$result2 = $db->query("SELECT lastname, firstname, count(user_id) 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
-   					WHERE attendance_datetime >= '".$_POST['start_year']."-".$_POST['start_month']."-".$_POST['start_day']."'"
-    				."AND attendance_datetime <= '".$_POST['end_year']."-".$_POST['end_month']."-".$_POST['end_day']."'". 
+   								WHERE attendance_datetime >= '".$_POST['start_date']."'".
+    							"AND attendance_datetime <= '".$_POST['end_date']."'". 
 											"GROUP BY user_id 
 											ORDER BY lastname;");
-	echo "THE DATES YOU HAVE ENTERED ARE: ".$_POST['start_month']."-".$_POST['start_day']."-".$_POST['start_year']."    TO    "	  
-		.$_POST['end_month']."-".$_POST['end_day']."-".$_POST['end_year']."<br><br><hr><br><br>";		
+	echo "<br><br><br>";
+	echo "THE DATES YOU HAVE ENTERED ARE: ".$_POST['start_date']." TO   ".$_POST['end_date'];	
+	echo "<br><br><br>";
 					
 							
 echo "<table border = 1>";
