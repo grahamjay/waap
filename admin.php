@@ -12,25 +12,28 @@
 
 </body>
 <ul> 
-    <?php
-    if(isset($_POST['all_click'])){
-        $db = new mysqli("127.0.0.1", "root", "root", "test");
+<?php
+   if(isset($_POST['all_click'])){
+       $db = new mysqli("127.0.0.1", "root", "root", "test");
 $result = $db->query("select lastname, firstname, count(user_id) 
-					from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
-					group by user_id 
-					ORDER BY lastname;");
-					
-					
+                   from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
+                   group by user_id 
+                   ORDER BY lastname;");
+                   
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
 while ($row = $result->fetch_assoc()){
-    echo htmlentities($row['lastname']);
-    echo " ";
-    echo htmlentities($row['firstname']);
-    echo " ";
-    echo htmlentities($row['count(user_id)']);
-    echo "<br><br>";
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
 
 
-}echo "<hr>";
+}echo "</table>";
 }
 
 
@@ -78,14 +81,21 @@ Or you can choose a set of dates:
 		.$_POST['end_month']."-".$_POST['end_day']."-".$_POST['end_year']."<br><br><hr><br><br>";		
 					
 							
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br><br>";
-}}
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result2->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
+}
 
 
 
@@ -96,37 +106,44 @@ Or you can search for an individual student:
 </h1>	
 <form id="individual" action="admin.php" method="POST">	
 	Last Name:
-		<input id ="lastname" name="lastnamebutton" type ="text">
+		<input id ="lastnamebutton" name="lastnamebutton" type ="text">
 	First Name:
 		<input id ="firstname" name="firstname" type ="text">
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
 		<br><br><br>	
 
-		
+</form>		
 <?php
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
-		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+		$result3 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
-    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') OR lastname = '".$_POST['lastnamebutton']";");
+    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
+    								OR lastname = ".$_POST['lastnamebutton'].";");
 						
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br>";
-}
-echo "<br><br><br>";
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result3->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
 
 }
 
 
 
 ?>
+
 <br>
 	Student ID number:
 		<input id ="IDnumber" name="IDnumber" type ="text">
@@ -138,21 +155,28 @@ echo "<br><br><br>";
 <?php
     if(isset($_POST['idnumberbutton'])){
     echo "<br><br>";
-        $db = new mysqli("127.0.0.1", "root", "", "test", 3307);
-		$result2 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+		$result4 = $db->query("SELECT lastname, firstname, count(user_id) from athletic_attendance
 								JOIN athletic_users
     							ON athletic_attendance.user_id=athletic_users.id
     							WHERE id = '".$_POST['IDnumber']."';");
 
 						
-while ($row2 = $result2->fetch_assoc()){
-    echo htmlentities($row2['lastname']);
-    echo " ";
-    echo htmlentities($row2['firstname']);
-    echo " ";
-    echo htmlentities($row2['count(user_id)']);
-    echo "<br><br>";
-}}
+echo "<table border = 1>";
+echo "<tr>";
+echo "<td> Last Name </td>";
+echo "<td>First Name </td>";
+echo "<td> Days Attended </td>";
+while ($row = $result4->fetch_assoc()){
+   echo "<tr>";
+   echo "<td>".htmlentities($row['lastname'])."</td>";
+   echo "<td>".htmlentities($row['firstname'])."</td>";
+   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+  echo "</tr>";
+
+
+}echo "</table>";
+}
 
 
 
