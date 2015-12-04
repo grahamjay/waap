@@ -8,7 +8,7 @@
 <h1>Click the following for giant list of attendance: </h1>
 	<input type = "submit" value ="ALL ATTENDANCE EVER" name="all_click">
 
-<br><br><br><br><br><hr>	
+<br><br><hr>	
 
 </body>
 <ul> 
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()){
 ?>
 </form>
 
-<br><br>
+
 	
 	
 <h1>
