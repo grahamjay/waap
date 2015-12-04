@@ -253,7 +253,7 @@ while ($row = $result->fetch_assoc()){
 
 ?>	
 		
-		
+<br><hr>		
 		
 
 </form>
