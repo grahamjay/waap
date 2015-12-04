@@ -169,7 +169,7 @@
 <br><br>
 <input type = "submit" name="submit" value="View Selected Sport">
 
-<br><br><br>
+<br><br><br><hr>
 <?php
  
 	if(isset($_POST['indv_sport']) and $_POST['sport']!= 'Nada')
@@ -253,7 +253,7 @@ while ($row = $result->fetch_assoc()){
 
 ?>	
 		
-<br><hr>		
+<br><br><br><hr>		
 		
 
 </form>
