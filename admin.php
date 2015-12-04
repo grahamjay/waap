@@ -203,7 +203,7 @@ Or you can search for an individual student:
 	First Name:
 		<input id ="firstname" name="firstname" type ="text">
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
-		<br><br><br>	
+		<br><br>	
 
 </form>		
 <?php
@@ -279,7 +279,7 @@ while ($row = $result4->fetch_assoc()){
 
 ?>
 
-<hr><br><br>
+<hr><br>
 <a href="sports.php"><h1>Click Here for Individual Sports Data</h1></a>
 
 
