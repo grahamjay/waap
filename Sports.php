@@ -166,7 +166,6 @@
   <option value="4">Softball</option>
   <option value="3">Baseball</option>
 </select>
-<br><br>
 <input type = "submit" name="submit" value="View Selected Sport">
 
 <br><br><br><hr>
