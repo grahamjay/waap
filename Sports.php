@@ -139,7 +139,7 @@
 
 <form id="indv_sports" action="sports.php" method="POST">
 
-<h1>VIEW ATTENDANCE for an individual sport: </h1>
+<h1>VIEW ATTENDANCE for an individual sport </h1>
 <select name="indv_sport">
 
 
