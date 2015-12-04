@@ -23,7 +23,7 @@
 		
 
 		
-	<br><br>
+
 	
 	
 
@@ -243,7 +243,7 @@ while ($row = $result->fetch_assoc()){
   <option value="3">Baseball</option>
 </select>
 		
-  <input type = "submit" name="submit" value="DELETE Selected Student">
+  <input type = "submit" name="submit" value="DELETE Selected Students">
 		
 <?php
 	if(isset($_POST['studentid11']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
