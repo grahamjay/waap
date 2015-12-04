@@ -42,6 +42,8 @@
   <option value="5">Boys Basketball</option>
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
+  <option value="11">Boys Swimming</option>
+  <option value="12">Girls Bowling</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
@@ -143,7 +145,7 @@
 <select name="indv_sport">
 
 
-  <option value="Nada">SELECT INDV SPORT</option>
+ <option value="Nada">SELECT INDV SPORT</option>
   <option value="1">Football</option>
   <option value="2">Volleyball</option>
   <option value="15">Boys Cross Country</option>
@@ -155,6 +157,8 @@
   <option value="5">Boys Basketball</option>
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
+  <option value="11">Boys Swimming</option>
+  <option value="12">Girls Bowling</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
@@ -219,7 +223,7 @@ while ($row = $result->fetch_assoc()){
 		<select name="sportremove">
 
 
-  <option value="Nada">SELECT INDV SPORT</option>
+ <option value="Nada">SELECT INDV SPORT</option>
   <option value="1">Football</option>
   <option value="2">Volleyball</option>
   <option value="15">Boys Cross Country</option>
@@ -231,6 +235,8 @@ while ($row = $result->fetch_assoc()){
   <option value="5">Boys Basketball</option>
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
+  <option value="11">Boys Swimming</option>
+  <option value="12">Girls Bowling</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
