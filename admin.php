@@ -73,6 +73,10 @@ echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
 echo "<td> Time Checked-In </td>";
 
+$total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance 
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
 
 while ($row = $result2->fetch_assoc()){
    echo "<tr>";
@@ -84,8 +88,15 @@ while ($row = $result2->fetch_assoc()){
    
   echo "</tr>";
 
+}
+  echo "<tr><td colspan=5 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+echo "</table>";
 
-}echo "</table>";
+
+
+
+
+
 }
 
 
@@ -117,6 +128,10 @@ echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
 echo "<td> Time Checked-In </td>";
 
+$total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance 
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
 
 while ($row = $result2->fetch_assoc()){
    echo "<tr>";
@@ -128,8 +143,15 @@ while ($row = $result2->fetch_assoc()){
    
   echo "</tr>";
 
+}
+  echo "<tr><td colspan=5 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+echo "</table>";
 
-}echo "</table>";
+
+
+
+
+
 }
 
 
