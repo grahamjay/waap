@@ -5,7 +5,7 @@
 <body>
 <hr>
 
-<h1> INSERT Students Into Sports </h1>
+<h1> INSERT students into sports </h1>
 <form id="sport" action="sports.php" method="POST">	
 
 	Student ID Numbers:
@@ -207,13 +207,15 @@ while ($row = $result->fetch_assoc()){
 ?>
 
 </form>	
-<h1> DELETE Students from a Sport </h1>
+<h1> DELETE students from a sport </h1>
 <form id="sport" action="sports.php" method="POST">	
 
 	Student ID Numbers:
 	<br>
 		<input id ="studentid11" name="studentid11" type ="text">
-		
+		<input id ="studentid12" name="studentid12" type ="text">
+		<input id ="studentid13" name="studentid13" type ="text">
+		<input id ="studentid14" name="studentid14" type ="text">
 		<select name="sportremove">
 
 
@@ -246,10 +248,20 @@ while ($row = $result->fetch_assoc()){
 <?php
 	if(isset($_POST['studentid11']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
 	{
-	    
 		$result = $db->query("DELETE from sports_enrollment WHERE student_id=".$_POST['studentid11']." AND sport_id=".$_POST['sportremove'].";");
 }
-
+	if(isset($_POST['studentid12']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
+	{
+		$result = $db->query("DELETE from sports_enrollment WHERE student_id=".$_POST['studentid12']." AND sport_id=".$_POST['sportremove'].";");
+}
+	if(isset($_POST['studentid13']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
+	{
+		$result = $db->query("DELETE from sports_enrollment WHERE student_id=".$_POST['studentid13']." AND sport_id=".$_POST['sportremove'].";");
+}
+	if(isset($_POST['studentid14']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
+	{
+		$result = $db->query("DELETE from sports_enrollment WHERE student_id=".$_POST['studentid14']." AND sport_id=".$_POST['sportremove'].";");
+}
 ?>	
 		
 <br><br><br><hr>		
