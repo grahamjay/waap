@@ -6,7 +6,7 @@
 <hr>
 
 <h1> Input Students Into Sports </h1>
-<form id="sport" action="Sports.php" method="POST">	
+<form id="sport" action="sports.php" method="POST">	
 
 	Student ID Numbers:
 	<br>
