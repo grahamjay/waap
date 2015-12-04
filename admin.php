@@ -1,14 +1,15 @@
 <head>
-<h1 style="text-align:center">Admin Page</h1>
+<h1 style="text-align:center; font-size:75px">Admin Page</h1>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
 
 <body>
 
 <form id="all_click" action="admin.php" method="POST">
 <h1>Click the following for giant list of attendance: </h1>
-	<input type = "submit" value ="ALL ATTENDANCE EVER" name="all_click">
+	<div style="padding-left:43%"><input type = "submit" value ="ALL ATTENDANCE EVER" name="all_click"></div>
 
-<br><br><hr>	
+<br><hr>	
 
 </body>
 <ul> 
@@ -51,7 +52,7 @@ Or you can choose certain dates:
 </h1>	
 <br>
 <form id="all_click" action="admin.php" method="POST">
-See attendance from TODAY in ALPHABETICAL ORDER:
+<div style="padding-left:30%">See attendance from TODAY in ALPHABETICAL ORDER:<br>
 <input type="submit" name="today_attendance" value="Today's Attendance">
 <br><br>
 <?php
@@ -105,7 +106,7 @@ echo "</table>";
 </form>
 
 <form id="all_click" action="admin.php" method="POST">
-See attendance from TODAY in order by the TIME THEY CHECKED IN:
+See attendance from TODAY in order by the TIME THEY CHECKED IN:<br>
 <input type="submit" name="today_attendance_time" value="Today's Attendance">
 <br><br>
 <?php
@@ -214,12 +215,12 @@ while ($row = $result2->fetch_assoc()){
 
 ?>
 
-<br> <br> <hr> 
+<br> <br> <hr> </div>
 <h1>
 Or you can search for an individual student:
 
 </h1>	
-<form id="individual" action="admin.php" method="POST">	
+<div style="padding-left:30%"><form id="individual" action="admin.php" method="POST">	
 	Last Name:
 		<input id ="lastnamebutton" name="lastnamebutton" type ="text">
 	First Name:
@@ -301,8 +302,8 @@ while ($row = $result4->fetch_assoc()){
 
 ?>
 
-<hr><br>
-<a href="sports.php"><h1>Click Here for Individual Sports Data</h1></a>
+<hr><br></div>
+<a href="sports.php"  style="color:blue"><h1>Click Here for Individual Sports Data</h1></a>
 
 
 </form>
