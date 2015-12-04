@@ -206,7 +206,54 @@ while ($row = $result->fetch_assoc()){
 
 
 ?>
+<h1> DELETE Students FROM a Sport </h1>
+<form id="sport" action="sports.php" method="POST">	
 
+	Student ID Numbers:
+	<br>
+		<input id ="studentid11" name="studentid11" type ="text">
+		
+		<select name="sportremove">
+
+
+  <option value="Nada">SELECT INDV SPORT</option>
+  <option value="1">Football</option>
+  <option value="2">Volleyball</option>
+  <option value="15">Boys Cross Country</option>
+  <option value="16">Girls Cross Country</option>
+  <option value="22">Cheer</option>
+  <option value="23">Dance</option>
+  <option value="13">Boys Golf</option>
+  <option value="6">Girls Basketball</option>
+  <option value="5">Boys Basketball</option>
+  <option value="10">Girls Bowling</option>
+  <option value="9">Boys Bowling</option>
+  <option value="21">Wrestling</option>
+  <option value="14">Girls Golf</option>
+  <option value="17">Boys Track & Field</option>
+  <option value="18">Girls Track & Field</option>
+  <option value="7">Boys Tennis</option>
+  <option value="8">Girls Tennis</option>
+  <option value="19">Boys Soccer</option>
+  <option value="20">Girls Soccer</option>
+  <option value="4">Softball</option>
+  <option value="3">Baseball</option>
+</select>
+		
+  <input type = "submit" name="submit" value="DELETE Selected Student">
+		
+<?php
+	if(isset($_POST['studentid11']) and isset($_POST['sportremove']) and $_POST['sportremove']!= 'Nada')
+	{
+	    
+		$result = $db->query("DELETE from sports_enrollment WHERE student_id=".$_POST['studentid11']." AND sport_id=".$_POST['sportremove'].";");
+}
+
+?>	
+		
+		
+		
+</form>	
 </form>
 <a href="admin.php"><h1>Click Here to go back to ADMIN page</h1></a>
 
