@@ -206,6 +206,8 @@ while ($row = $result->fetch_assoc()){
 
 
 ?>
+
+</form>	
 <h1> DELETE Students FROM a Sport </h1>
 <form id="sport" action="sports.php" method="POST">	
 
@@ -253,7 +255,7 @@ while ($row = $result->fetch_assoc()){
 		
 		
 		
-</form>	
+
 </form>
 <a href="admin.php"><h1>Click Here to go back to ADMIN page</h1></a>
 
