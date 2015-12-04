@@ -43,7 +43,7 @@
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
   <option value="11">Boys Swimming</option>
-  <option value="12">Girls Bowling</option>
+  <option value="12">Girls Swimming</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
@@ -158,7 +158,7 @@
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
   <option value="11">Boys Swimming</option>
-  <option value="12">Girls Bowling</option>
+  <option value="12">Girls Swimming</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
@@ -236,7 +236,7 @@ while ($row = $result->fetch_assoc()){
   <option value="10">Girls Bowling</option>
   <option value="9">Boys Bowling</option>
   <option value="11">Boys Swimming</option>
-  <option value="12">Girls Bowling</option>
+  <option value="12">Girls Swimming</option>
   <option value="21">Wrestling</option>
   <option value="14">Girls Golf</option>
   <option value="17">Boys Track & Field</option>
