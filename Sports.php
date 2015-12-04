@@ -5,7 +5,7 @@
 <body>
 <hr>
 
-<h1> Input Students Into Sports </h1>
+<h1> INSERT Students Into Sports </h1>
 <form id="sport" action="sports.php" method="POST">	
 
 	Student ID Numbers:
@@ -139,7 +139,7 @@
 
 <form id="indv_sports" action="sports.php" method="POST">
 
-<h1>View attendance for an individual sport: </h1>
+<h1>VIEW ATTENDANCE for an individual sport: </h1>
 <select name="indv_sport">
 
 
@@ -207,7 +207,7 @@ while ($row = $result->fetch_assoc()){
 ?>
 
 </form>	
-<h1> DELETE Students FROM a Sport </h1>
+<h1> DELETE Students from a Sport </h1>
 <form id="sport" action="sports.php" method="POST">	
 
 	Student ID Numbers:
