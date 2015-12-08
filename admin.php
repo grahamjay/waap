@@ -99,7 +99,7 @@ while ($row = $result2->fetch_assoc()){
   echo "</tr>";
 
 }
-  echo "<tr><td colspan=5 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+  echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
 echo "</table>";
 
 
@@ -163,7 +163,7 @@ while ($row = $result2->fetch_assoc()){
   echo "</tr>";
 
 }
-  echo "<tr><td colspan=5 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+  echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
 echo "</table>";
 
 
