@@ -280,21 +280,20 @@ Or you can search for an individual student:
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
     								where ";
-    	if(isset($_POST['lastnamebutton']) && isset($_POST['firstname'] )   {
-    	
-    	$part2 = "lastname = '".$_POST['lastnamebutton']."' and firstname = '".$_POST['firstname']."';";
-    	
+    								
+    	if(isset($_POST['lastnamebutton']) && isset($_POST['firstname']))   {
+    		$part2 = "lastname = '".$_POST['lastnamebutton']."' and firstname = '".$_POST['firstname']."';";
     	}
-    	else if (isset($_POST['lastnamebutton']) && !isset($_POST['firstname']  )  {
-    	
-    	$part2 = "lastname = '".$_POST['lastnamebutton']."';";
+    	else if (isset($_POST['lastnamebutton']) && !isset($_POST['firstname']))  {
+    		$part2 = "lastname = '".$_POST['lastnamebutton']."';";
     	}
-    	else if (!isset($_POST['lastnamebutton']) && isset($_POST['firstname']  )  {
-    	
-    	$part2 = "firstname = '".$_POST['firstname']."';";
+    	else if (!isset($_POST['lastnamebutton']) && isset($_POST['firstname']))  {
+    		$part2 = "firstname = '".$_POST['firstname']."';";
     	}
     	
-    	else{ $part2 = "id = -1;";}
+    	else { 
+    	$part2 = "id = -1;";
+    	}
     	
 		$result3 = $db->query($sql.$part2);
 						
