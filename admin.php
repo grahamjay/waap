@@ -288,7 +288,6 @@ echo "<td> Grade </td>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-echo "<td> Time Checked-In </td>";
 echo "<td> Sport </td>";
 
 
@@ -306,7 +305,7 @@ $ethangrote = $swagnasty->fetch_assoc();
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
-   echo "<td>".htmlentities($row['Time'])."</td>";
+
    
 if( !empty($ethangrote)){
    echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
