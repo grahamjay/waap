@@ -245,7 +245,7 @@ if( !empty($ethangrote)){
   echo "</tr>";
 
 }
-  echo "<tr><td colspan=5 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+  echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
 echo "</table>";
 
 
@@ -276,7 +276,7 @@ Or you can search for an individual student:
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result3 = $db->query("SELECT grade, lastname, firstname, count(user_id) from athletic_attendance 
+		$result3 = $db->query("SELECT id, grade, lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
     								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
@@ -288,16 +288,41 @@ echo "<td> Grade </td>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result3->fetch_assoc()){
+echo "<td> Time Checked-In </td>";
+echo "<td> Sport </td>";
+
+
+$total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance 
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
+
+while ($row = $result2->fetch_assoc()){
+
+$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
+$ethangrote = $swagnasty->fetch_assoc();
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+   echo "<td>".htmlentities($row['Time'])."</td>";
+   
+if( !empty($ethangrote)){
+   echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
+  } else {
+  echo "<td></td>";
+  }
   echo "</tr>";
 
+}
+  echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+echo "</table>";
 
-}echo "</table>";
+
+
+
+
 
 }
 
@@ -317,7 +342,7 @@ while ($row = $result3->fetch_assoc()){
     if(isset($_POST['idnumberbutton'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result4 = $db->query("SELECT grade, lastname, firstname, count(user_id) from athletic_attendance
+		$result4 = $db->query("SELECT id, grade, lastname, firstname, count(user_id) from athletic_attendance
 								JOIN athletic_users
     							ON athletic_attendance.user_id=athletic_users.id
     							WHERE id = '".$_POST['IDnumber']."';");
@@ -329,18 +354,43 @@ echo "<td> Grade </td>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
-while ($row = $result4->fetch_assoc()){
+echo "<td> Time Checked-In </td>";
+echo "<td> Sport </td>";
+
+
+$total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance 
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
+
+while ($row = $result2->fetch_assoc()){
+
+$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
+$ethangrote = $swagnasty->fetch_assoc();
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+   echo "<td>".htmlentities($row['Time'])."</td>";
+   
+if( !empty($ethangrote)){
+   echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
+  } else {
+  echo "<td></td>";
+  }
   echo "</tr>";
 
-
-}echo "</table>";
 }
+  echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+echo "</table>";
 
+
+
+
+
+
+}
 
 
 ?>
