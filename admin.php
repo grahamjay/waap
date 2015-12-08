@@ -59,7 +59,7 @@ Or you can choose certain dates:
     if(isset($_POST['today_attendance'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
+		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
    								WHERE attendance_datetime >= curdate()
@@ -81,8 +81,9 @@ $total = $db->query("SELECT count(distinct user_id) as swag
 		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
 
 while ($row = $result2->fetch_assoc()){
-$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
-$ethangrote = $swagnasty->fetch_assoc();
+
+	$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
+	$ethangrote = $swagnasty->fetch_assoc();
 
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
@@ -90,11 +91,11 @@ $ethangrote = $swagnasty->fetch_assoc();
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
    echo "<td>".htmlentities($row['Time'])."</td>";
- if( !empty($ethangrote)){
-   echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
-  } else {
-  echo "<td></td>";
-  }  
+	if( !empty($ethangrote)){
+	   echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
+	  } else {
+	  echo "<td></td>";
+	  }
   echo "</tr>";
 
 }
@@ -121,7 +122,7 @@ See attendance from TODAY in order by the TIME THEY CHECKED IN:<br>
     if(isset($_POST['today_attendance_time'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result2 = $db->query("SELECT grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
+		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
    								WHERE attendance_datetime >= curdate()
@@ -136,6 +137,7 @@ echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
 echo "<td> Days Attended </td>";
 echo "<td> Time Checked-In </td>";
+echo "<td> Sport </td>";
 
 $total = $db->query("SELECT count(distinct user_id) as swag
 		FROM athletic_attendance 
@@ -143,13 +145,21 @@ $total = $db->query("SELECT count(distinct user_id) as swag
 		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
 
 while ($row = $result2->fetch_assoc()){
+
+	$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
+	$ethangrote = $swagnasty->fetch_assoc();
+
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
    echo "<td>".htmlentities($row['Time'])."</td>";
-   
+	if( !empty($ethangrote)){
+	   echo "<td>".htmlentities($ethangrote['sport_name'])."</td>";  
+	  } else {
+	  echo "<td></td>";
+	  }
   echo "</tr>";
 
 }
