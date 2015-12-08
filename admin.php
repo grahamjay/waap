@@ -276,11 +276,27 @@ Or you can search for an individual student:
     if(isset($_POST['firstnamebutton'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result3 = $db->query("SELECT id, grade, lastname, firstname, count(user_id) from athletic_attendance 
+        $sql= "SELECT id, grade, lastname, firstname, count(user_id) from athletic_attendance 
 									join athletic_users
     								on athletic_attendance.user_id=athletic_users.id
-    								where lastname = ('".$_POST['lastnamebutton']."' and firstname like '%".$_POST['firstname']."%') 
-    								OR lastname = ".$_POST['lastnamebutton'].";");
+    								where ";
+    	if(isset($_POST['lastnamebutton']) && isset($_POST['firstname'] )   {
+    	
+    	$part2 = "lastname = '".$_POST['lastnamebutton']."' and firstname = '".$_POST['firstname']."';";
+    	
+    	}
+    	else if (isset($_POST['lastnamebutton']) && !isset($_POST['firstname']  )  {
+    	
+    	$part2 = "lastname = '".$_POST['lastnamebutton']."';";
+    	}
+    	else if (!isset($_POST['lastnamebutton']) && isset($_POST['firstname']  )  {
+    	
+    	$part2 = "firstname = '".$_POST['firstname']."';";
+    	}
+    	
+    	else{ $part2 = "id = -1;";}
+    	
+		$result3 = $db->query($sql.$part2);
 						
 echo "<table border = 1>";
 echo "<tr>";
