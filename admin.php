@@ -313,7 +313,7 @@ $total = $db->query("SELECT count(distinct user_id) as swag
 
 while ($row = $result3->fetch_assoc()){
 
-$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
+$swagnasty = $db->query("SELECT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id = ".$row['id'].";");    
 $ethangrote = $swagnasty->fetch_assoc();
    echo "<tr>";
    echo "<td>".htmlentities($row['grade'])."</td>";
