@@ -1,5 +1,6 @@
 <head>
 <h1 style="text-align:center">Sports Admin Page</h1>
+<link rel="stylesheet" type="text/css" href="bootstrap.css">
 </head>
 
 <body>
