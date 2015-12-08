@@ -11,7 +11,7 @@
 </style>
 </head>
 
-<body style="background-image:url(waukeelifting.png); background-size:100%;background-repeat:no-repeat; text-align:center; padding-right:5%">
+<body style="background-image:url(weightroom.jpg); background-size:100%;background-repeat:no-repeat; text-align:center; padding-right:5%">
 
 <form id="number" action="Weightroom001.php" method="POST">
    <div style="font-size: 60px; padding-top:40%">ID number:</div>
