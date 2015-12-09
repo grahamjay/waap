@@ -11,12 +11,12 @@
 </style>
 </head>
 
-<body style="background-image:url(weightlifting.png); background-size:100%;background-repeat:no-repeat; text-align:center; padding-right:5%">
+<body style="background-image:url(WSClogo.jpg);background-position:center top; background-size:100%;background-repeat:no-repeat; text-align:center; padding-right:5%; padding-bottom:1000px">
 
 <form id="number" action="Weightroom001.php" method="POST">
-   <div style="font-size: 60px; padding-top:40%">ID number:</div>
-        <input type="text" style="width:300px; height:50px; font-size:40px;" id="id" name="id" placeholder="16000"/>
-<br>   <button type="submit" name="ID" style="width:100px; height:50px; font-size:20px">Submit</button>
+   <div style="font-size: 45px; padding-top:18%; padding-left:3%;color:purple">ID number:</div>
+        <input type="text" style="width:250px; height:40px; font-size:40px; margin-left:40px" id="id" name="id" placeholder="16000"/>
+<br>   <button type="submit" name="ID" style="width:100px; height:50px; font-size:20px;margin-left:40px">Submit</button>
 
 <?php
 
