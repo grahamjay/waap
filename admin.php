@@ -208,12 +208,12 @@ Choose an end date:
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
 		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id) 
-								FROM athletic_attendance 
-    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
-   								WHERE attendance_datetime >= '".$_POST['start_date']."'".
-    							"AND attendance_datetime <= '".$_POST['end_date']."'". 
-											"GROUP BY user_id 
-											ORDER BY lastname;");
+                                FROM athletic_attendance 
+                               JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+                                  WHERE attendance_datetime >= '".$_POST['start_date']."'
+                               AND attendance_datetime <= date_add('".$_POST['end_date']."', interval 1 day) 
+                                            GROUP BY user_id 
+                                            ORDER BY lastname;");
 	echo "<br><br><br>";
 	echo "THE DATES YOU HAVE ENTERED ARE: ".$_POST['start_date']." TO   ".$_POST['end_date'];	
 	echo "<br><br><br>";
@@ -228,11 +228,11 @@ echo "<td> Count </td>";
 echo "<td> Sport </td>";
 
 
-$total = $db->query("SELECT count(distinct user_id) as swag
+$total = $db->query("SELECT count(user_id) as swag
 		FROM athletic_attendance 
 		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
 		WHERE attendance_datetime >= '".$_POST['start_date']."'".
-    							"AND attendance_datetime <= '".$_POST['end_date']."';" )->fetch_object()->swag;
+    							"AND attendance_datetime <= date_add('".$_POST['end_date']."', interval 1 day);" )->fetch_object()->swag;
 
 while ($row = $result2->fetch_assoc()){
 

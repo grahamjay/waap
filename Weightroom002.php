@@ -40,7 +40,7 @@ if ($_COOKIE['userid'] == $row['id']) {
 
 <input type="button" value="Check In" onclick="window.location.href='in.php'" /><br><br>
 
-<input type="button" value="General Info" onclick="window.location.href='generalinfo.html'" />
+<input type="button" value="General Info" onclick="window.location.href='generalinfo.php'" />
 
 <input type="button" value="Maxes" onclick="window.location.href='maxes.html'" />
 
