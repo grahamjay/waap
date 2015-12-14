@@ -52,7 +52,7 @@ Or you can choose certain dates:
 </h1>	
 <br>
 <form id="all_click" action="admin.php" method="POST">
-<div style="padding-left:30%">See attendance from TODAY in ALPHABETICAL ORDER:<br>
+<div style="padding-left:30%">See attendance from TODAY in ALPHABETICAL ORDER:
 <input type="submit" name="today_attendance" value="Today's Attendance">
 <br><br>
 <?php
@@ -119,7 +119,7 @@ echo "</table>";
 </form>
 
 <form id="all_click" action="admin.php" method="POST">
-See attendance from TODAY in order by the TIME THEY CHECKED IN:<br>
+See attendance from TODAY in order by the TIME THEY CHECKED IN:
 <input type="submit" name="today_attendance_time" value="Today's Attendance">
 <br><br>
 <?php
@@ -187,7 +187,108 @@ echo "</table>";
 
 </form>
 
+    <form id="indv_sport_daily" action="admin.php" method="POST">
+        See attendance from:
+        <input type="date" name="sport_by_date" value="sport_by_date">
+        BY SPORT:
 
+        <select name="sport">
+
+
+            <option value="Nada">SELECT INDV SPORT</option>
+            <option value="1">Football</option>
+            <option value="2">Volleyball</option>
+            <option value="15">Boys Cross Country</option>
+            <option value="16">Girls Cross Country</option>
+            <option value="22">Cheer</option>
+            <option value="23">Dance</option>
+            <option value="13">Boys Golf</option>
+            <option value="6">Girls Basketball</option>
+            <option value="5">Boys Basketball</option>
+            <option value="10">Girls Bowling</option>
+            <option value="9">Boys Bowling</option>
+            <option value="21">Wrestling</option>
+            <option value="14">Girls Golf</option>
+            <option value="17">Boys Track & Field</option>
+            <option value="18">Girls Track & Field</option>
+            <option value="7">Boys Tennis</option>
+            <option value="8">Girls Tennis</option>
+            <option value="19">Boys Soccer</option>
+            <option value="20">Girls Soccer</option>
+            <option value="4">Softball</option>
+            <option value="3">Baseball</option>
+        </select>
+
+        <input type = "submit" name="submit" value="View Selected Sport">
+
+
+        <?php
+        if(isset($_POST['sport_by_date']) && isset($_POST['sport']))
+        {
+            $db = new mysqli("127.0.0.1", "root", "root", "test");
+            $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
+								FROM athletic_attendance
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
+    							JOIN sports_enrollment ON sports_enrollment.student_id = athletic_users.id
+   								WHERE attendance_datetime >= curdate()
+   								AND sports_enrollment.sport_id=".$_POST['sport']."
+											GROUP BY user_id
+											ORDER BY attendance_datetime;");
+
+
+            echo "<table border = 1>";
+            echo "<tr>";
+            echo "<td> Grade </td>";
+            echo "<td> Last Name </td>";
+            echo "<td>First Name </td>";
+            echo "<td> Count </td>";
+            echo "<td> Time Checked-In </td>";
+            echo "<td> Sport </td>";
+
+            $total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
+		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
+
+            while ($row = $result2->fetch_assoc()){
+
+
+
+                echo "<tr>";
+                echo "<td>".htmlentities($row['grade'])."</td>";
+                echo "<td>".htmlentities($row['lastname'])."</td>";
+                echo "<td>".htmlentities($row['firstname'])."</td>";
+                echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+                echo "<td>".htmlentities($row['Time'])."</td>";
+
+                if(!empty($_POST['sport'])) {
+                    echo "<td>";
+
+                    $helpme = $db->query("SELECT sport_name FROM sports WHERE id =" . $_POST['sport'] . ";");
+                    $finally = $helpme->fetch_assoc();
+                    echo htmlentities($finally['sport_name']);
+
+
+                    echo "</td>";
+                }
+                else {
+                    echo "<td></td>";
+                }
+                echo "</tr>";
+
+            }
+            echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+            echo "</table>";
+
+
+
+
+
+        }
+
+
+        ?>
+    </form>
 
 
 
