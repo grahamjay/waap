@@ -291,7 +291,7 @@ echo "</table>";
     </form>
 
 
-
+<br><br>
 
 <form id="all_click" action="admin.php" method="POST">	
 
