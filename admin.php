@@ -419,7 +419,25 @@ echo "</table>";
 
 
 ?>
+<form id="all_click" action="admin.php" method="POST">
 
+<h1> Use this to DELETE students from attendance: </h1>
+
+Student ID: <input id ="IDnumber" name="IDnumber" type ="text"> FROM
+<input type="date" value="delete_date" name="delete_date">
+<input type="submit" name="delete" value="Delete Student from Attendance">
+<?php
+if(isset($_POST['IDnumber']) && isset($_POST['delete_date'])){
+
+$db = new mysqli("127.0.0.1", "root", "root", "test");
+$result = $db->query("DELETE from athletic_attendance WHERE user_id=".$_POST['IDnumber']." AND attendance_datetime like '%".$_POST['delete_date']."%';");
+					
+}
+
+
+
+?>
+</form>
 <hr><br></div>
 <a href="sports.php"  style="color:blue"><h1>Click Here for Individual Sports Data</h1></a>
 
