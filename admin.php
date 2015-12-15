@@ -383,8 +383,8 @@ Or you can search for an individual student:
 	First Name:
 		<input id ="firstname" name="firstname" type ="text">
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
-		<br><br>	
-
+		<br>
+</div>
 </form>		
 <?php
     if(isset($_POST['firstnamebutton']) || isset($_POST["lastname"])){
@@ -459,6 +459,7 @@ echo "</table>";
 
 ?>
 </form>
+    <div align="center">
 <form id="all_click" action="admin.php" method="POST">
 <br>
 	Student ID number:
@@ -520,8 +521,10 @@ echo "</table>";
 
 
 ?>
+    </form>
+    </div>
 <form id="all_click" action="admin.php" method="POST">
-
+    <div align="center">
 <h1> Use this to DELETE students from attendance: </h1>
 
 Student ID: <input id ="IDnumber" name="IDnumber" type ="text"> FROM
@@ -538,12 +541,13 @@ $result = $db->query("DELETE from athletic_attendance WHERE user_id=".$_POST['ID
 
 
 ?>
+        </div>
 </form>
-<hr><br></div>
+<hr><br>
 <a href="sports.php"  style="color:blue"><h1>Click Here for Individual Sports Data</h1></a>
 
 
-</form>
+
 
 
 
