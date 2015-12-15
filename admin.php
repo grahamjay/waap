@@ -230,7 +230,7 @@ echo "</table>";
 								FROM athletic_attendance
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
     							JOIN sports_enrollment ON sports_enrollment.student_id = athletic_users.id
-   								WHERE attendance_datetime >= curdate()
+   								WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%'
    								AND sports_enrollment.sport_id=".$_POST['sport']."
 											GROUP BY user_id
 											ORDER BY attendance_datetime;");
@@ -248,7 +248,8 @@ echo "</table>";
             $total = $db->query("SELECT count(distinct user_id) as swag
 		FROM athletic_attendance
 		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
-		WHERE attendance_datetime >= curdate();")->fetch_object()->swag;
+		JOIN sports_enrollment ON athletic_users.id=sports_enrollment.student_id
+		WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%' AND sport_id=".$_POST['sport'].";")->fetch_object()->swag;
 
             while ($row = $result2->fetch_assoc()){
 
@@ -372,12 +373,13 @@ echo "</table>";
 
 <br> <br> <hr> </div>
 </form>
-<form id="all_click" action="admin.php" method="POST">
+
 <h1>
 Or you can search for an individual student:
 
-</h1>	
-<div style="padding-left:30%"><form id="individual" action="admin.php" method="POST">	
+</h1>
+    <form id="individual" action="admin.php" method="POST">
+<div style="padding-left:30%">
 	Last Name:
 		<input id ="lastnamebutton" name="lastnamebutton" type ="text">
 	First Name:
