@@ -9,7 +9,7 @@
 <h1>Click the following for giant list of attendance: </h1>
 	<div style="padding-left:43%"><input type = "submit" value ="ALL ATTENDANCE EVER" name="all_click"></div>
 
-<br><hr>	
+<br>
 
 </body>
 <ul> 
@@ -221,12 +221,75 @@ echo "</table>";
 
         <input type = "submit" name="submit" value="View Selected Sport">
 
+        <div>
+            <?php
+            if(isset($_POST['sport_by_date']) && $_POST['sport']=='Nada')
+            {
+                echo "<br><br>";
+                $db = new mysqli("127.0.0.1", "root", "root", "test");
+                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
+								FROM athletic_attendance
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
+   								WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%'
+											GROUP BY user_id
+											ORDER BY attendance_datetime;");
 
-        <?php
-        if(isset($_POST['sport_by_date']) && isset($_POST['sport']))
-        {
-            $db = new mysqli("127.0.0.1", "root", "root", "test");
-            $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
+
+                echo "<table border = 1>";
+                echo "<tr>";
+                echo "<td> Grade </td>";
+                echo "<td> Last Name </td>";
+                echo "<td>First Name </td>";
+                echo "<td> Count </td>";
+                echo "<td> Time Checked-In </td>";
+                echo "<td> Sport </td>";
+
+                $total = $db->query("SELECT count(distinct user_id) as swag
+		FROM athletic_attendance
+		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
+		WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%'")->fetch_object()->swag;
+
+                while ($row = $result2->fetch_assoc()){
+
+                    $swagnasty = $db->query("SELECT DISTINCT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");
+
+                    echo "<tr>";
+                    echo "<td>".htmlentities($row['grade'])."</td>";
+                    echo "<td>".htmlentities($row['lastname'])."</td>";
+                    echo "<td>".htmlentities($row['firstname'])."</td>";
+                    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+                    echo "<td>".htmlentities($row['Time'])."</td>";
+
+                    if(!empty($swagnasty)){
+                        echo "<td>";
+                        while($ethangrote = $swagnasty->fetch_assoc()) {
+                            echo htmlentities($ethangrote['sport_name'])."  ";
+                        }
+                        echo "</td>";
+                    } else {
+                        echo "<td></td>";
+                    }
+                    echo "</tr>";
+
+                }
+                echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+                echo "</table>";
+
+
+
+
+
+
+            }
+
+
+
+
+
+            elseif(isset($_POST['sport_by_date']) && isset($_POST['sport']) && $_POST['sport']!='Nada')
+            {
+                $db = new mysqli("127.0.0.1", "root", "root", "test");
+                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
 								FROM athletic_attendance
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
     							JOIN sports_enrollment ON sports_enrollment.student_id = athletic_users.id
@@ -236,59 +299,60 @@ echo "</table>";
 											ORDER BY attendance_datetime;");
 
 
-            echo "<table border = 1>";
-            echo "<tr>";
-            echo "<td> Grade </td>";
-            echo "<td> Last Name </td>";
-            echo "<td>First Name </td>";
-            echo "<td> Count </td>";
-            echo "<td> Time Checked-In </td>";
-            echo "<td> Sport </td>";
+                echo "<table border = 1>";
+                echo "<tr>";
+                echo "<td> Grade </td>";
+                echo "<td> Last Name </td>";
+                echo "<td>First Name </td>";
+                echo "<td> Count </td>";
+                echo "<td> Time Checked-In </td>";
+                echo "<td> Sport </td>";
 
-            $total = $db->query("SELECT count(distinct user_id) as swag
+                $total = $db->query("SELECT count(distinct user_id) as swag
 		FROM athletic_attendance
 		JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
 		JOIN sports_enrollment ON athletic_users.id=sports_enrollment.student_id
 		WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%' AND sport_id=".$_POST['sport'].";")->fetch_object()->swag;
 
-            while ($row = $result2->fetch_assoc()){
+                while ($row = $result2->fetch_assoc()){
 
 
 
-                echo "<tr>";
-                echo "<td>".htmlentities($row['grade'])."</td>";
-                echo "<td>".htmlentities($row['lastname'])."</td>";
-                echo "<td>".htmlentities($row['firstname'])."</td>";
-                echo "<td>".htmlentities($row['count(user_id)'])."</td>";
-                echo "<td>".htmlentities($row['Time'])."</td>";
+                    echo "<tr>";
+                    echo "<td>".htmlentities($row['grade'])."</td>";
+                    echo "<td>".htmlentities($row['lastname'])."</td>";
+                    echo "<td>".htmlentities($row['firstname'])."</td>";
+                    echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+                    echo "<td>".htmlentities($row['Time'])."</td>";
 
-                if(!empty($_POST['sport'])) {
-                    echo "<td>";
+                    if(!empty($_POST['sport'])) {
+                        echo "<td>";
 
-                    $helpme = $db->query("SELECT sport_name FROM sports WHERE id =" . $_POST['sport'] . ";");
-                    $finally = $helpme->fetch_assoc();
-                    echo htmlentities($finally['sport_name']);
+                        $helpme = $db->query("SELECT sport_name FROM sports WHERE id =" . $_POST['sport'] . ";");
+                        $finally = $helpme->fetch_assoc();
+                        echo htmlentities($finally['sport_name']);
 
 
-                    echo "</td>";
+                        echo "</td>";
+                    }
+                    else {
+                        echo "<td></td>";
+                    }
+                    echo "</tr>";
+
                 }
-                else {
-                    echo "<td></td>";
-                }
-                echo "</tr>";
+                echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
+                echo "</table>";
+
+
+
+
 
             }
-            echo "<tr><td colspan=6 style='text-align:center;'>TOTAL: ".$total."</td></tr>";
-            echo "</table>";
 
 
-
-
-
-        }
-
-
-        ?>
+            ?>
+    </div>
     </form>
 
 
@@ -387,7 +451,8 @@ Or you can search for an individual student:
 		<input type = "submit" name="firstnamebutton" value="Search By Name">
 		<br>
 </div>
-</form>		
+</form>
+    <div align="center">
 <?php
     if(isset($_POST['firstnamebutton']) || isset($_POST["lastname"])){
     echo "<br><br>";
@@ -398,13 +463,13 @@ Or you can search for an individual student:
     								where ";
     								    								
     	if(!empty($_POST['lastnamebutton']) && !empty($_POST['firstname']))   {
-    		$part2 = "lastname = '".$_POST['lastnamebutton']."' and firstname LIKE  '%".$_POST['firstname']."%';";
+    		$part2 = "lastname = '".$_POST['lastnamebutton']."' and firstname LIKE  '%".$_POST['firstname']."%' group by user_id;";
     	}
     	else if (!empty($_POST['lastnamebutton']) && empty($_POST['firstname']))  {
-    		$part2 = "lastname = '".$_POST['lastnamebutton']."';";
+    		$part2 = "lastname = '".$_POST['lastnamebutton']."' group by user_id;";
     	}
     	else if (empty($_POST['lastnamebutton']) && !empty($_POST['firstname']))  {
-    		$part2 = "firstname LIKE '%".$_POST['firstname']."%';";
+    		$part2 = "firstname LIKE '%".$_POST['firstname']."%' group by user_id;";
     	}
     	
     	else { 
@@ -417,6 +482,7 @@ Or you can search for an individual student:
 						
 echo "<table border = 1>";
 echo "<tr>";
+        echo "<td> ID </td>";
 echo "<td> Grade </td>";
 echo "<td> Last Name </td>";
 echo "<td>First Name </td>";
@@ -431,6 +497,7 @@ while ($row = $result3->fetch_assoc()){
 $swagnasty = $db->query("SELECT DISTINCT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");    
 
    echo "<tr>";
+    echo "<td>".htmlentities($row['id'])."</td>";
    echo "<td>".htmlentities($row['grade'])."</td>";
    echo "<td>".htmlentities($row['lastname'])."</td>";
    echo "<td>".htmlentities($row['firstname'])."</td>";
@@ -460,7 +527,8 @@ echo "</table>";
 
 
 ?>
-</form>
+        </div>
+
     <div align="center">
 <form id="all_click" action="admin.php" method="POST">
 <br>
@@ -546,6 +614,9 @@ $result = $db->query("DELETE from athletic_attendance WHERE user_id=".$_POST['ID
         </div>
 </form>
 <hr><br>
+
+
+    <a href="allstudents.php" style="color:blue"><h1>Click Here for STUDENT LOOKUP</h1></a>
 <a href="sports.php"  style="color:blue"><h1>Click Here for Individual Sports Data</h1></a>
 
 
