@@ -12,35 +12,60 @@
 <br>
 
 </body>
-<ul> 
-<?php
-   if(isset($_POST['all_click'])){
-       $db = new mysqli("127.0.0.1", "root", "root", "test");
-$result = $db->query("select grade, lastname, firstname, count(user_id) 
-                   from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id 
-                   group by user_id 
-                   ORDER BY lastname;");
-                   
-echo "<table border = 1>";
-echo "<tr>";
-echo "<td> Grade </td>";
-echo "<td> Last Name </td>";
-echo "<td> First Name </td>";
-echo "<td> Count </td>";
-while ($row = $result->fetch_assoc()){
-   echo "<tr>";
-   echo "<td>".htmlentities($row['grade'])."</td>";
-   echo "<td>".htmlentities($row['lastname'])."</td>";
-   echo "<td>".htmlentities($row['firstname'])."</td>";
-   echo "<td>".htmlentities($row['count(user_id)'])."</td>";
-  echo "</tr>";
+<ul>
+    <?php
+    if(isset($_POST['all_click'])){
+        $db = new mysqli("127.0.0.1", "root", "root", "test");
+        $result = $db->query("select grade, lastname, firstname, count(user_id)
+                  from athletic_users join athletic_attendance on athletic_attendance.user_id=athletic_users.id
+                  group by user_id
+                  ORDER BY lastname;");
+
+        echo "<table border = 1>";
+        echo "<tr>";
+        echo "<td> Grade </td>";
+        echo "<td> Last Name </td>";
+        echo "<td> First Name </td>";
+        echo "<td> Count </td>";
+
+        $total = $db->query("SELECT count(distinct user_id) as swag
+        FROM athletic_attendance
+        JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id;")->fetch_object()->swag;
+
+        $total5 = $db->query("SELECT count(user_id) as swag
+        FROM athletic_attendance
+        JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id;")->fetch_object()->swag;
+
+        while ($row = $result->fetch_assoc()){
+
+            $swagnasty = $db->query("SELECT DISTINCT sport_name from sports JOIN sports_enrollment on sports.id=sports_enrollment.sport_id WHERE student_id =".$row['id'].";");
+
+            echo "<tr>";
+            echo "<td>".htmlentities($row['grade'])."</td>";
+            echo "<td>".htmlentities($row['lastname'])."</td>";
+            echo "<td>".htmlentities($row['firstname'])."</td>";
+            echo "<td>".htmlentities($row['count(user_id)'])."</td>";
+            if(!empty($swagnasty)){
+                echo "<td>";
+                while($ethangrote = $swagnasty->fetch_assoc()) {
+                    echo htmlentities($ethangrote['sport_name'])."  ";
+                }
+                echo "</td>";
+            } else {
+                echo "<td></td>";
+            }
+            echo "</tr>";
+
+        }
+        echo "<tr><td colspan=6 style='text-align:center;'>TOTAL STUDENTS: ".$total."</td></tr>";
+        echo "<tr><td colspan=6 style='text-align:center;'>TOTAL SIGN INS: ".$total5."</td></tr>";
+        echo "</tr>";
 
 
-}echo "</table>";
-}
+    }echo "</table>";
 
 
-?>
+    ?>
 </form>
 
 
@@ -59,13 +84,12 @@ Or you can choose certain dates:
     if(isset($_POST['today_attendance'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
-								FROM athletic_attendance 
-    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
+		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', LPAD(EXTRACT(MINUTE from attendance_datetime),2,'0')) as Time
+    							FROM athletic_attendance
+    							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
    								WHERE attendance_datetime >= curdate()
-											GROUP BY user_id 
+											GROUP BY user_id
 											ORDER BY lastname;");
-
 echo "<table border = 1>";
 echo "<tr>";
 echo "<td> Grade </td>";
@@ -126,7 +150,7 @@ See attendance from TODAY in order by the TIME THEY CHECKED IN:
     if(isset($_POST['today_attendance_time'])){
     echo "<br><br>";
         $db = new mysqli("127.0.0.1", "root", "root", "test");
-		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time 
+		$result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', LPAD(EXTRACT(MINUTE from attendance_datetime),2,'0')) as Time
 								FROM athletic_attendance 
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id 
    								WHERE attendance_datetime >= curdate()
@@ -227,7 +251,7 @@ echo "</table>";
             {
                 echo "<br><br>";
                 $db = new mysqli("127.0.0.1", "root", "root", "test");
-                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
+                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', LPAD(EXTRACT(MINUTE from attendance_datetime),2,'0')) as Time
 								FROM athletic_attendance
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
    								WHERE attendance_datetime LIKE '%".$_POST['sport_by_date']."%'
@@ -289,7 +313,7 @@ echo "</table>";
             elseif(isset($_POST['sport_by_date']) && isset($_POST['sport']) && $_POST['sport']!='Nada')
             {
                 $db = new mysqli("127.0.0.1", "root", "root", "test");
-                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', EXTRACT(MINUTE from attendance_datetime)) as Time
+                $result2 = $db->query("SELECT id, grade, lastname, firstname, count(user_id), CONCAT(EXTRACT(HOUR from attendance_datetime),':', LPAD(EXTRACT(MINUTE from attendance_datetime),2,'0')) as Time
 								FROM athletic_attendance
     							JOIN athletic_users ON athletic_attendance.user_id=athletic_users.id
     							JOIN sports_enrollment ON sports_enrollment.student_id = athletic_users.id
@@ -614,7 +638,37 @@ $result = $db->query("DELETE from athletic_attendance WHERE user_id=".$_POST['ID
         </div>
 </form>
 <hr><br>
+    <form id="add_student_attendance" action="admin.php" method="POST">
+        <div align="center">
+            <h1> Use this to ADD students TO attendance: </h1>
 
+            Student ID: <input id ="IDnumber" name="IDnumber" type ="text"> FROM
+            <input type="date" value="add_date" name="add_date">
+            <input type="submit" name="delete" value="ADD Student TO Attendance">
+            <?php
+            if(isset($_POST['IDnumber']) && isset($_POST['add_date'])){
+
+                $db = new mysqli("127.0.0.1", "root", "root", "test");
+                $insert2 = "INSERT INTO athletic_attendance (user_id, attendance_datetime) values (".$_POST['IDnumber'].", '".$_POST['add_date']." 22:22:22');";
+                $result = $db->query($insert2);
+
+
+
+
+
+
+            }
+
+
+
+            ?>
+        </div>
+
+
+
+
+
+    </form>
 
     <a href="allstudents.php" style="color:blue"><h1>Click Here for STUDENT LOOKUP</h1></a>
 <a href="sports.php"  style="color:blue"><h1>Click Here for Individual Sports Data</h1></a>
